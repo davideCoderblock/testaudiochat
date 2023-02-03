@@ -7,6 +7,14 @@ var indexRouter = require('../src/routes/index');
 var usersRouter = require('../src/routes/users');
 const app = express();
 
+// Serve i file statici dalla cartella "public"
+app.use(express.static('public'));
+
+// Risposta alla richiesta di una pagina
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -42,7 +50,9 @@ app.get('/data', (req, res) => {
   };
   res.json(data);
 });
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-});
+
+// app.listen(3000, () => {
+//   console.log('Example app listening on port 3000!');
+// });
+
 module.exports = app;
